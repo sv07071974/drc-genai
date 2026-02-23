@@ -54,7 +54,13 @@ The Digital Readiness Check Portal provides organizations with a structured asse
    - Optional pulse-check add-ons for Technology, Finance, Procurement, Legal, Operations, Marketing, and Production teams
    - Automatic blending of department answers into the overall readiness picture
 
-8. **Automation Insight Engine**
+8. **Generative AI Consultant Integration (NEW)**
+   - Secure Python/FastAPI backend acting as an LLM gateway
+   - Real-time, context-aware insights powered by OpenAI (GPT-4o)
+   - Dynamic prompt engineering based on user role, department, and assessment scores
+   - Strict privacy controls requiring explicit user consent before AI processing
+
+9. **Automation Insight Engine**
    - Detects low-scoring tool/technology answers and surfaces automation opportunities
    - Library of department-specific automation plays mapped to each question
    - Highlights top manual pain points to target for workflow/RPA pilots
@@ -113,9 +119,15 @@ The Digital Readiness Check Portal provides organizations with a structured asse
 - **Font Awesome**: Icons and visual elements
 
 ### Backend Integration
-- **RESTful Table API**: Data persistence and retrieval
-- **JSON Data Format**: Structured data storage
-- **Asynchronous Operations**: Non-blocking user experience
+- **FastAPI (Python)**: High-performance backend API for LLM proxying
+- **LangChain & OpenAI**: Orchestration of GPT-4o for dynamic insight generation
+- **Uvicorn**: ASGI web server implementation
+- **Docker**: Containerized deployment for consistent environments
+
+### Infrastructure & Deployment
+- **Synology NAS**: Host environment using Docker Compose
+- **Cloudflare Zero Trust Tunnels**: Secure, inbound routing and SSL termination
+- **Subdomain Routing**: Dedicated API routing (`api.domain.com`) to bypass restrictive reverse proxies
 
 ### Data Schema
 The assessment results are stored with the following structure:
@@ -181,14 +193,21 @@ Insights from all tracks roll into the same scoring engine so leadership gets a 
 ```
 digital-readiness-check/
 ├── index.html              # Main assessment page
+├── app.py                  # FastAPI GenAI backend
+├── requirements.txt        # Python backend dependencies
+├── Dockerfile              # Backend container definition
+├── docker-compose.yml      # Multi-container orchestration
 ├── css/
 │   └── style.css          # Custom styling and responsive design
 ├── js/
-│   └── assessment.js        # Core functionality and logic
+│   └── assessment.js        # Core functionality and AI fetch logic
 └── README.md             # Documentation
 ```
 
 ## API Endpoints
+
+### AI Consultant Services
+- `POST /api/generate-insights` - Accepts assessment payload and returns AI-generated JSON insights. Requires valid `OPENAI_API_KEY` in environment.
 
 ### Assessment Results Management
 - `GET tables/assessment_results` - Retrieve all results
