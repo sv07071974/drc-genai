@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  drc-app:
+    build: .
+    container_name: drc-app
+    restart: unless-stopped
+    ports:
+      # Map Synology Port : Container Port
+      - "8589:8589" # Backend API
+      - "8590:8590" # Frontend UI
+    environment:
+      # The OPENAI_API_KEY is picked up from the .env file in the same directory
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data

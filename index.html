@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Readiness Check Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-0"><i class="fas fa-digital-tachograph me-3"></i>Digital Readiness Check</h1>
+                    <p class="mb-0 mt-2">Assess your organization's digital transformation readiness</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="progressText">0% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Welcome Section -->
+        <section id="welcome-section" class="section-card">
+            <div class="text-center welcome-content">
+                <div class="welcome-icon mb-4">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h2>Welcome to Digital Readiness Check</h2>
+                <div class="mb-3">
+                    <span class="badge bg-primary fs-6 px-3 py-2 rounded-pill shadow-sm"
+                        style="background: linear-gradient(45deg, #0d6efd, #6610f2) !important;"><i
+                            class="fas fa-robot me-2"></i>Now Enhanced with Generative AI Insights</span>
+                </div>
+                <p class="lead mx-auto" style="max-width: 700px;">This comprehensive assessment will evaluate your
+                    organization's readiness for digital
+                    transformation across five key categories. <strong>Upon completion, our Gen AI Consultant will
+                        generate a highly personalized strategic roadmap tailored to your specific role and
+                        scores.</strong></p>
+
+                <div class="role-selector mt-4" aria-labelledby="roleSelectorLabel">
+                    <p class="text-uppercase small fw-semibold text-muted mb-2" id="roleSelectorLabel">Choose your
+                        perspective</p>
+                    <div class="role-options">
+                        <label class="role-card">
+                            <input type="radio" name="roleType" value="management" checked>
+                            <span class="role-title">Management / Leadership</span>
+                            <span class="role-copy">Strategy, governance, funding, and roadmap oversight.</span>
+                        </label>
+                        <label class="role-card">
+                            <input type="radio" name="roleType" value="employee">
+                            <span class="role-title">Employee (All Departments)</span>
+                            <span class="role-copy">Daily tools, collaboration, culture, and training insights.</span>
+                        </label>
+                        <label class="role-card">
+                            <input type="radio" name="roleType" value="employee_dept">
+                            <span class="role-title">Employee – Department-specific</span>
+                            <span class="role-copy">Add a short deep dive for your department.</span>
+                        </label>
+                    </div>
+                    <div class="department-selector d-none" id="departmentSelectorGroup">
+                        <label for="departmentSelect" class="form-label">Select your department</label>
+                        <select id="departmentSelect" class="form-select">
+                            <option value="" selected disabled>Choose department</option>
+                            <option value="technology">Technology</option>
+                            <option value="finance">Finance</option>
+                            <option value="procurement">Procurement</option>
+                            <option value="legal">Legal</option>
+                            <option value="operations">Operations</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="production">Production</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="category-preview-grid mt-5">
+                    <div class="category-preview">
+                        <i class="fas fa-building"></i>
+                        <h5>Organization</h5>
+                        <small>Structure & Strategy</small>
+                    </div>
+                    <div class="category-preview">
+                        <i class="fas fa-users"></i>
+                        <h5>People</h5>
+                        <small>Skills & Capabilities</small>
+                    </div>
+                    <div class="category-preview">
+                        <i class="fas fa-heart"></i>
+                        <h5>Culture</h5>
+                        <small>Mindset & Adoption</small>
+                    </div>
+                    <div class="category-preview">
+                        <i class="fas fa-tools"></i>
+                        <h5>Tools</h5>
+                        <small>Processes & Methods</small>
+                    </div>
+                    <div class="category-preview">
+                        <i class="fas fa-microchip"></i>
+                        <h5>Technology</h5>
+                        <small>Infrastructure & Platforms</small>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg mt-5" id="startAssessmentBtn" onclick="startAssessment()">
+                    <i class="fas fa-play me-2"></i>Start Assessment
+                </button>
+                <p class="text-muted fst-italic mt-2">Most teams finish in about 5-7 minutes.</p>
+            </div>
+        </section>
+
+        <!-- Assessment Sections -->
+        <section id="assessment-section" class="section-card d-none">
+            <div class="section-progress d-none" id="sectionProgress">
+                <div>
+                    <span class="section-progress-label" id="sectionProgressLabel">Section 1 of 5</span>
+                    <span class="section-progress-category" id="sectionProgressCategory">Organization</span>
+                </div>
+                <ul class="section-progress-dots" id="sectionProgressDots"></ul>
+            </div>
+            <!-- Organization Section -->
+            <div class="assessment-category" id="category-organization">
+                <div class="category-header">
+                    <h3><i class="fas fa-building me-3"></i>Organization</h3>
+                    <p>Evaluate your organizational structure, strategy, and governance for digital transformation.</p>
+                </div>
+                <div class="questions-container" id="questions-organization"></div>
+            </div>
+
+            <!-- People Section -->
+            <div class="assessment-category d-none" id="category-people">
+                <div class="category-header">
+                    <h3><i class="fas fa-users me-3"></i>People</h3>
+                    <p>Assess workforce skills, competencies, and readiness for digital change.</p>
+                </div>
+                <div class="questions-container" id="questions-people"></div>
+            </div>
+
+            <!-- Culture Section -->
+            <div class="assessment-category d-none" id="category-culture">
+                <div class="category-header">
+                    <h3><i class="fas fa-heart me-3"></i>Culture</h3>
+                    <p>Measure organizational culture, mindset, and openness to digital innovation.</p>
+                </div>
+                <div class="questions-container" id="questions-culture"></div>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="assessment-category d-none" id="category-tools">
+                <div class="category-header">
+                    <h3><i class="fas fa-tools me-3"></i>Tools</h3>
+                    <p>Evaluate processes, methodologies, and tools supporting digital initiatives.</p>
+                </div>
+                <div class="questions-container" id="questions-tools"></div>
+            </div>
+
+            <!-- Technology Section -->
+            <div class="assessment-category d-none" id="category-technology">
+                <div class="category-header">
+                    <h3><i class="fas fa-microchip me-3"></i>Technology</h3>
+                    <p>Assess IT infrastructure, platforms, and technology capabilities.</p>
+                </div>
+                <div class="questions-container" id="questions-technology"></div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="navigation-buttons mt-4">
+                <button class="btn btn-secondary" id="prevBtn" onclick="navigateSection('prev')" style="display: none;">
+                    <i class="fas fa-arrow-left me-2"></i>Previous
+                </button>
+                <button class="btn btn-primary" id="nextBtn" onclick="navigateSection('next')">
+                    Next<i class="fas fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+            <div class="validation-message d-none" id="validationMessage">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <span>Please answer every question in this section before continuing.</span>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="section-card d-none">
+            <div class="results-header text-center mb-5">
+                <h2>Digital Readiness Assessment Results</h2>
+                <p class="lead">Your organization's digital transformation readiness score</p>
+            </div>
+
+            <!-- Condensed Results Layout -->
+            <div class="results-summary-container">
+                <!-- Overall Score -->
+                <div class="results-summary-item">
+                    <div class="compact-score-card">
+                        <div class="compact-score-circle score-circle">
+                            <span class="compact-score-value score-value" id="overallScore">0</span>
+                            <span class="score-label">Overall Score</span>
+                        </div>
+                        <div class="score-description text-start">
+                            <h4 id="overallTitle" class="mb-2">Getting Started</h4>
+                            <p id="overallDescription" class="small mb-0">Your organization is beginning its digital
+                                transformation journey.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Scores Chart -->
+                <div class="results-summary-item">
+                    <div class="compact-chart-container chart-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Category Results -->
+            <div class="category-results-grid condensed">
+                <div class="category-result-card compact" id="result-organization">
+                    <div class="result-header">
+                        <h5><i class="fas fa-building me-2"></i>Organization</h5>
+                        <span class="score-badge" id="score-organization">0</span>
+                    </div>
+                    <div class="result-details">
+                        <p id="description-organization" class="small d-none">Evaluation pending...</p>
+                        <div class="recommendations">
+                            <strong>Recommendations:</strong>
+                            <ul id="recommendations-organization"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-result-card compact" id="result-people">
+                    <div class="result-header">
+                        <h5><i class="fas fa-users me-2"></i>People</h5>
+                        <span class="score-badge" id="score-people">0</span>
+                    </div>
+                    <div class="result-details">
+                        <p id="description-people" class="small d-none">Evaluation pending...</p>
+                        <div class="recommendations">
+                            <strong>Recommendations:</strong>
+                            <ul id="recommendations-people"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-result-card compact" id="result-culture">
+                    <div class="result-header">
+                        <h5><i class="fas fa-heart me-2"></i>Culture</h5>
+                        <span class="score-badge" id="score-culture">0</span>
+                    </div>
+                    <div class="result-details">
+                        <p id="description-culture" class="small d-none">Evaluation pending...</p>
+                        <div class="recommendations">
+                            <strong>Recommendations:</strong>
+                            <ul id="recommendations-culture"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-result-card compact" id="result-tools">
+                    <div class="result-header">
+                        <h5><i class="fas fa-tools me-2"></i>Tools</h5>
+                        <span class="score-badge" id="score-tools">0</span>
+                    </div>
+                    <div class="result-details">
+                        <p id="description-tools" class="small d-none">Evaluation pending...</p>
+                        <div class="recommendations">
+                            <strong>Recommendations:</strong>
+                            <ul id="recommendations-tools"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-result-card compact" id="result-technology">
+                    <div class="result-header">
+                        <h5><i class="fas fa-microchip me-2"></i>Technology</h5>
+                        <span class="score-badge" id="score-technology">0</span>
+                    </div>
+                    <div class="result-details">
+                        <p id="description-technology" class="small d-none">Evaluation pending...</p>
+                        <div class="recommendations">
+                            <strong>Recommendations:</strong>
+                            <ul id="recommendations-technology"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GenAI Consultant Insights Section -->
+            <div class="ai-consultant-section mt-5 mb-5 p-4 rounded bg-light border border-primary position-relative"
+                id="aiConsultantContainer" style="display: none;">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3"
+                        style="width: 48px; height: 48px;">
+                        <i class="fas fa-robot fa-lg"></i>
+                    </div>
+                    <h3 class="mb-0 text-primary">AI Consultant Insights</h3>
+                    <span class="badge bg-primary ms-3">Generated by AI</span>
+                </div>
+
+                <div id="aiLoadingState" class="text-center py-4 d-none">
+                    <div class="spinner-grow text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3 text-muted fw-bold">Analyzing your specific scores and context...</p>
+                </div>
+
+                <div id="aiResultsContent" class="d-none">
+                    <div class="mb-4">
+                        <h5 class="text-secondary"><i class="fas fa-file-contract me-2"></i>Executive Summary</h5>
+                        <p id="aiExecSummary" class="lead ms-4"></p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h5 class="text-danger"><i class="fas fa-exclamation-triangle me-2"></i>Key Risks</h5>
+                            <ul id="aiKeyRisks" class="list-group list-group-flush ms-3"></ul>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <h5 class="text-success"><i class="fas fa-magic me-2"></i>Automation Opportunities</h5>
+                            <ul id="aiAutomationOpps" class="list-group list-group-flush ms-3"></ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <h5 class="text-info"><i class="fas fa-map-signs me-2"></i>Strategic Roadmap</h5>
+                        <div id="aiRoadmap" class="row ms-2 mt-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insights Section -->
+            <div class="insights-layout mt-5">
+                <div class="improvement-roadmap">
+                    <h4 class="mb-4"><i class="fas fa-route me-2"></i>Your Digital Transformation Roadmap</h4>
+                    <p class="lead mb-4">Based on your assessment, here's a prioritized action plan to improve your
+                        digital readiness:</p>
+                    <div id="roadmapSteps"></div>
+                </div>
+
+                <div class="automation-opportunities">
+                    <h4 class="mb-3"><i class="fas fa-robot me-2"></i>Automation Opportunities</h4>
+                    <p class="lead mb-3">Focus on the following manual pain points to unlock quick wins:</p>
+                    <ul id="automationList" class="automation-list"></ul>
+                </div>
+            </div>
+
+            <!-- Detailed Recommendations Report -->
+            <div class="detailed-recommendations-section mt-5">
+                <div class="section-header text-center mb-4">
+                    <h3><i class="fas fa-clipboard-list me-2"></i>Detailed Recommendations Report</h3>
+                    <p class="text-muted">Comprehensive action items based on your assessment scores - perfect for team
+                        reference and planning</p>
+                </div>
+                <div id="detailedRecommendationsContainer"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="text-center mt-5">
+                <button class="btn btn-primary me-3" onclick="saveResults()">
+                    <i class="fas fa-save me-2"></i>Save Results
+                </button>
+                <button class="btn btn-outline-primary me-3" onclick="downloadPdfResults()">
+                    <i class="fas fa-file-pdf me-2"></i>Download PDF
+                </button>
+                <button class="btn btn-outline-secondary me-3" onclick="downloadCsvResults()">
+                    <i class="fas fa-file-csv me-2"></i>Download CSV
+                </button>
+                <button class="btn btn-outline-secondary me-3" onclick="downloadExcelResults()">
+                    <i class="fas fa-file-excel me-2"></i>Download Excel
+                </button>
+                <button class="btn btn-outline-secondary me-3" onclick="downloadResponsesText()">
+                    <i class="fas fa-file-alt me-2"></i>Download Responses
+                </button>
+                <button class="btn btn-outline-dark me-3" onclick="downloadMasterLog()">
+                    <i class="fas fa-list me-2"></i>Master Log
+                    <span class="badge rounded-pill bg-secondary ms-2" id="masterLogCount">0</span>
+                </button>
+                <button class="btn btn-outline-secondary" onclick="restartAssessment()">
+                    <i class="fas fa-redo me-2"></i>Take Again
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0 text-muted">&copy; 2026 Digital Readiness Check Portal by Sajeev Kumar. Enhanced with
+                Generative AI. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/assessment.js"></script>
+</body>
+
+</html>

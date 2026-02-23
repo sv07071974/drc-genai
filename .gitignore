@@ -1,0 +1,16 @@
+# Environments
+.env
+
+# MacOS
+.DS_Store
+
+# Virtual Environments
+venv/
+env/
+
+# Python Caches
+__pycache__/
+*.pyc
+
+# Docker
+docker-compose.override.yml
