@@ -36,6 +36,7 @@ class AssessmentData(BaseModel):
     department: str
     scores: dict
     consentGiven: bool
+    answers: dict = {}
 
 # Define the consulting prompt template
 CONSULTANT_TEMPLATE = """
@@ -46,14 +47,17 @@ Here is their profile:
 - Role/Perspective: {role}
 - Department: {department}
 
-Here are their scores (out of 5) for each category:
+Here are their average category scores (out of 5):
 - Organization: {org_score}
 - People: {people_score}
 - Culture: {culture_score}
 - Tools: {tools_score}
 - Technology: {tech_score}
 
-Based on this specific profile and these exact scores, provide a highly tailored, strategic evaluation.
+Here are their exact answers to the individual assessment questions (1=Lowest/Negative, 5=Highest/Positive):
+{detailed_answers}
+
+Based on this specific profile, these exact scores, and particularly their specific question-level answers, provide a highly tailored, strategic evaluation.
 DO NOT use markdown formatting outside of the JSON structure.
 
 You must respond ONLY with a valid JSON object matching this exact structure:
@@ -79,7 +83,7 @@ Ensure the tone is professional, consultative, and directly addresses the implic
 """
 
 prompt = PromptTemplate(
-    input_variables=["role", "department", "org_score", "people_score", "culture_score", "tools_score", "tech_score"],
+    input_variables=["role", "department", "org_score", "people_score", "culture_score", "tools_score", "tech_score", "detailed_answers"],
     template=CONSULTANT_TEMPLATE
 )
 
@@ -112,6 +116,9 @@ async def generate_insights(data: AssessmentData):
         # Construct the chain
         chain = prompt | llm | StrOutputParser()
         
+        # Format detailed answers as a string bulleted list
+        answers_text = "\\n".join([f"- \"{k}\": {v}/5" for k, v in data.answers.items()]) if data.answers else "No detailed answers provided."
+        
         # Invoke the chain
         result_str = chain.invoke({
             "role": data.role,
@@ -120,7 +127,8 @@ async def generate_insights(data: AssessmentData):
             "people_score": data.scores.get("people", 0),
             "culture_score": data.scores.get("culture", 0),
             "tools_score": data.scores.get("tools", 0),
-            "tech_score": data.scores.get("technology", 0)
+            "tech_score": data.scores.get("technology", 0),
+            "detailed_answers": answers_text
         })
         
         # Clean the response in case the LLM returned markdown code blocks (e.g., ```json ... ```)

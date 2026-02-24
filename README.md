@@ -11,9 +11,9 @@ The Digital Readiness Check Portal provides organizations with a structured asse
 ### ✅ Currently Implemented
 
 1. **Comprehensive Assessment Framework**
-   - 25 carefully crafted questions across 5 categories
-   - 5-point Likert scale responses
-   - Contextual descriptions for each question
+   - 25 carefully crafted questions across 5 categories per track
+   - Standardized Interactive Input Types (Interactive Emoji and Scenario Matrix)
+   - Contextual descriptions to define the "Why" behind each question
    - Category-specific evaluation criteria
 
 2. **Interactive User Interface**
@@ -50,9 +50,10 @@ The Digital Readiness Check Portal provides organizations with a structured asse
    - Assessment restart capability
 
 7. **Multi-role & Department Journeys**
-   - Separate tracks for Management/Leadership, Employees, and Department-specific deep dives
-   - Optional pulse-check add-ons for Technology, Finance, Procurement, Legal, Operations, Marketing, and Production teams
-   - Automatic blending of department answers into the overall readiness picture
+   - **Management/Leadership Track:** Focuses on enterprise strategy, governance, and capital allocation.
+   - **Middle Management Track (NEW):** Focuses on enablement, operationalizing strategy, and driving local adoption.
+   - **Employee Track:** Captures adoption, enablement, and frontline sentiment.
+   - **Department Deep Dives:** Optional pulse-check add-ons for Technology, Finance, Procurement, Legal, Operations, Marketing, and Production teams.
 
 8. **Generative AI Consultant Integration (NEW)**
    - Secure Python/FastAPI backend acting as an LLM gateway
@@ -163,18 +164,23 @@ The assessment results are stored with the following structure:
 
 1. **Management / Leadership Track**
    - Focuses on strategy, governance, investment cadence, and enterprise-wide enablement
+   - Formatted as perceptual "I" statements to ensure construct validity when triangulated with team sentiment
    - Ideal for steering committees or transformation offices
 
-2. **Employee (All Departments)**
+2. **Middle Management Track (Directors / Leads)**
+   - Focuses on *translating* strategy into operations, removing roadblocks, and securing local resources
+   - Specifically tests middle-managers on their ability to unblock their teams and operationalize digital tools
+
+3. **Employee (All Departments)**
    - Captures adoption, enablement, and frontline sentiment across the five readiness pillars
    - Great for quarterly pulse checks tied to internal comms
 
-3. **Employee + Department Deep Dive**
+4. **Employee + Department Deep Dive**
    - Adds targeted workflows for Technology, Finance, Procurement, Legal, Operations, Marketing, and Production
    - Each department receives bespoke tool & technology prompts mapped to automation opportunities
    - Perfect for embedding in existing “pulse” or Voice-of-Employee programs
 
-Insights from all tracks roll into the same scoring engine so leadership gets a unified readiness score while still drilling into department-specific blockers.
+Insights from all tracks roll into the same GenAI orchestration engine, which uses the `role` and `answers` context to deliver tailored, persona-specific consulting recommendations.
 
 ### For Administrators
 

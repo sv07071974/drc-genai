@@ -21,6 +21,7 @@ const ASSESSMENT_CONFIG = {
 
 const ROLE_TYPES = {
     MANAGEMENT: 'management',
+    MIDDLE_MANAGEMENT: 'middle_management',
     EMPLOYEE: 'employee',
     EMPLOYEE_DEPT: 'employee_dept'
 };
@@ -86,7 +87,8 @@ const QUESTIONS_EMPLOYEE = {
             question: 'Leadership explains how digital priorities impact my team.',
             description: 'Clarity on strategy helps employees align their daily work to the roadmap.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.SEGMENTED
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         },
         {
             id: 'emp_org_2',
@@ -109,14 +111,16 @@ const QUESTIONS_EMPLOYEE = {
             question: 'Digital efforts feel coordinated across departments rather than siloed.',
             description: 'Cross-team alignment prevents duplicate work and conflicting goals.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.GRADIENT
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         },
         {
             id: 'emp_org_5',
             question: 'My manager shares a roadmap for upcoming digital changes.',
             description: 'Local context makes the enterprise roadmap actionable for teams.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.SEGMENTED
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         }
     ],
     people: [
@@ -141,21 +145,24 @@ const QUESTIONS_EMPLOYEE = {
             question: 'I know who to ask when I need help with a digital tool.',
             description: 'Clear champions accelerate troubleshooting and adoption.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.SEGMENTED
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         },
         {
             id: 'emp_people_4',
             question: 'Performance goals recognize digital upskilling or knowledge sharing.',
             description: 'Rewarding digital behaviors encourages participation.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.GRADIENT
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         },
         {
             id: 'emp_people_5',
             question: 'Recruitment brings in colleagues with strong digital experience.',
             description: 'Fresh talent raises the overall capability baseline.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.SEGMENTED
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         }
     ],
     culture: [
@@ -180,14 +187,16 @@ const QUESTIONS_EMPLOYEE = {
             question: 'Departments openly share lessons from their digital projects.',
             description: 'Storytelling helps other teams avoid repeated mistakes.',
             options: FREQUENCY_SCALE,
-            inputType: INPUT_TYPES.SEGMENTED
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_FREQUENCY
         },
         {
             id: 'emp_culture_4',
             question: 'Customer feedback is used to refine our digital tools.',
             description: 'Customer insight keeps teams focused on real value.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.GRADIENT
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         },
         {
             id: 'emp_culture_5',
@@ -220,7 +229,8 @@ const QUESTIONS_EMPLOYEE = {
             question: 'I can automate repetitive steps without waiting on IT.',
             description: 'Citizen automation keeps momentum high.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.SEGMENTED
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         },
         {
             id: 'emp_tools_4',
@@ -235,7 +245,8 @@ const QUESTIONS_EMPLOYEE = {
             question: 'Project work follows a clear delivery method (Agile, Kanban, etc.).',
             description: 'Shared methods make collaboration smoother.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.GRADIENT
+            inputType: INPUT_TYPES.SCENARIO,
+            scenarios: SCENARIO_MATURITY
         }
     ],
     technology: [
@@ -252,7 +263,8 @@ const QUESTIONS_EMPLOYEE = {
             question: 'Requesting a new digital tool is straightforward.',
             description: 'Lightweight intake processes encourage innovation.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.SEGMENTED
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         },
         {
             id: 'emp_tech_3',
@@ -267,7 +279,8 @@ const QUESTIONS_EMPLOYEE = {
             question: 'Security requirements are clear and easy to follow.',
             description: 'Clarity keeps adoption high without creating friction.',
             options: AGREEMENT_SCALE,
-            inputType: INPUT_TYPES.GRADIENT
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         },
         {
             id: 'emp_tech_5',
@@ -288,7 +301,8 @@ const DEPARTMENT_DEEP_DIVES = {
                 question: 'Critical incidents are triaged automatically before engineers engage.',
                 description: 'Automation in intake reduces noise and response time.',
                 options: AGREEMENT_SCALE,
-                inputType: INPUT_TYPES.SEGMENTED
+                inputType: INPUT_TYPES.SCENARIO,
+                scenarios: SCENARIO_MATURITY
             }
         ],
         technology: [
@@ -331,7 +345,8 @@ const DEPARTMENT_DEEP_DIVES = {
                 question: 'Vendor onboarding steps are tracked in a shared workflow.',
                 description: 'Visibility over onboarding prevents manual follow-ups.',
                 options: AGREEMENT_SCALE,
-                inputType: INPUT_TYPES.SEGMENTED
+                inputType: INPUT_TYPES.SCENARIO,
+                scenarios: SCENARIO_MATURITY
             }
         ],
         technology: [
@@ -374,7 +389,8 @@ const DEPARTMENT_DEEP_DIVES = {
                 question: 'Shift schedules and handovers are generated digitally.',
                 description: 'Automated scheduling removes whiteboard updates.',
                 options: AGREEMENT_SCALE,
-                inputType: INPUT_TYPES.SEGMENTED
+                inputType: INPUT_TYPES.SCENARIO,
+                scenarios: SCENARIO_MATURITY
             }
         ],
         technology: [
@@ -405,7 +421,8 @@ const DEPARTMENT_DEEP_DIVES = {
                 question: 'Performance dashboards refresh automatically from ad platforms and CRM.',
                 description: 'Automated reporting frees time for optimization.',
                 options: AGREEMENT_SCALE,
-                inputType: INPUT_TYPES.SEGMENTED
+                inputType: INPUT_TYPES.SCENARIO,
+                scenarios: SCENARIO_MATURITY
             }
         ]
     },
@@ -639,446 +656,428 @@ const DETAILED_RECOMMENDATIONS = {
     }
 };
 
-// Question Database
 const QUESTIONS = {
     organization: [
         {
-            id: 'org_1',
-            question: 'Does your organization have a documented digital transformation strategy?',
-            description: 'A clear strategy outlines goals, timelines, and resources for digital initiatives.',
-            inputType: INPUT_TYPES.SCENARIO,
-            options: [
-                { text: 'No strategy exists', value: 1 },
-                { text: 'Strategy is being developed', value: 2 },
-                { text: 'Strategy exists but not well communicated', value: 3 },
-                { text: 'Clear strategy exists and is communicated', value: 4 },
-                { text: 'Strategy is regularly reviewed and updated', value: 5 }
-            ],
-            scenarios: [
-                { title: 'No Strategy', desc: 'No strategy exists', value: 1 },
-                { title: 'In Development', desc: 'Strategy is being developed', value: 2 },
-                { title: 'Exists, Not Shared', desc: 'Strategy exists but not well communicated', value: 3 },
-                { title: 'Clear & Communicated', desc: 'Clear strategy exists and is communicated', value: 4 },
-                { title: 'Continuously Updated', desc: 'Strategy is regularly reviewed and updated', value: 5 }
-            ]
-        },
-        {
-            id: 'org_2',
-            question: 'How is digital transformation governed in your organization?',
-            description: 'Governance includes oversight, decision-making processes, and accountability.',
-            inputType: INPUT_TYPES.SCENARIO,
-            options: [
-                { text: 'No formal governance', value: 1 },
-                { text: 'Ad-hoc governance', value: 2 },
-                { text: 'Some governance structures exist', value: 3 },
-                { text: 'Well-defined governance structure', value: 4 },
-                { text: 'Mature governance with regular reviews', value: 5 }
-            ],
-            scenarios: [
-                { title: 'None', desc: 'No formal governance', value: 1 },
-                { title: 'Ad-hoc', desc: 'Ad-hoc governance', value: 2 },
-                { title: 'Some Structures', desc: 'Some governance structures exist', value: 3 },
-                { title: 'Well-Defined', desc: 'Well-defined governance structure', value: 4 },
-                { title: 'Mature', desc: 'Mature governance with regular reviews', value: 5 }
-            ]
-        },
-        {
-            id: 'org_3',
-            question: 'Are digital initiatives adequately funded?',
-            description: 'Funding includes budget allocation for technology, training, and resources.',
-            inputType: INPUT_TYPES.SEGMENTED,
-            options: [
-                { text: 'No dedicated budget', value: 1 },
-                { text: 'Limited budget available', value: 2 },
-                { text: 'Moderate budget allocated', value: 3 },
-                { text: 'Adequate budget for most initiatives', value: 4 },
-                { text: 'Well-funded with multi-year budget', value: 5 }
-            ]
-        },
-        {
-            id: 'org_4',
-            question: 'How integrated are digital initiatives across departments?',
-            description: 'Integration ensures alignment and avoids duplication of efforts.',
+            id: 'mgt_org_1',
+            question: 'I clearly explain how digital priorities impact the teams I manage.',
+            description: 'Clarity on strategy helps employees align their daily work to the roadmap.',
+            options: AGREEMENT_SCALE,
             inputType: INPUT_TYPES.EMOJI,
-            emojiSet: [
-                { emoji: '🏝️', label: 'Siloed', value: 1 },
-                { emoji: '🔗', label: 'Limited', value: 2 },
-                { emoji: '🤝', label: 'Some', value: 3 },
-                { emoji: '🌐', label: 'Good', value: 4 },
-                { emoji: '🚀', label: 'Fully Integrated', value: 5 }
-            ],
-            options: [
-                { text: 'Siloed initiatives', value: 1 },
-                { text: 'Limited coordination', value: 2 },
-                { text: 'Some cross-department collaboration', value: 3 },
-                { text: 'Good integration across departments', value: 4 },
-                { text: 'Fully integrated enterprise-wide', value: 5 }
-            ]
+            emojiSet: EMOJI_AGREEMENT
         },
         {
-            id: 'org_5',
-            question: 'How does leadership support digital transformation?',
-            description: 'Leadership support includes commitment, resources, and active participation.',
-            inputType: INPUT_TYPES.GRADIENT,
-            options: [
-                { text: 'Little to no support', value: 1 },
-                { text: 'Passive support', value: 2 },
-                { text: 'Moderate support and involvement', value: 3 },
-                { text: 'Strong support and participation', value: 4 },
-                { text: 'Championing transformation actively', value: 5 }
-            ]
+            id: 'mgt_org_2',
+            question: 'I provide regular updates on digital initiatives to my department.',
+            description: 'Consistent updates keep employees aware of timing and expectations.',
+            options: FREQUENCY_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_FREQUENCY
+        },
+        {
+            id: 'mgt_org_3',
+            question: 'I allocate resources (time or budget) for my teams to test suggested improvements.',
+            description: 'Access to funding or time encourages grass-roots innovation.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mgt_org_4',
+            question: 'I actively coordinate my department\'s digital efforts with other leaders to avoid silos.',
+            description: 'Cross-team alignment prevents duplicate work and conflicting goals.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mgt_org_5',
+            question: 'I regularly share the enterprise digital roadmap with my teams.',
+            description: 'Local context makes the enterprise roadmap actionable for teams.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         }
     ],
     people: [
         {
-            id: 'peo_1',
-            question: 'How would you rate the digital skills of your workforce?',
-            description: 'Digital skills include technical proficiency and digital literacy.',
-            inputType: INPUT_TYPES.GRADIENT,
-            options: [
-                { text: 'Poor digital skills', value: 1 },
-                { text: 'Below average skills', value: 2 },
-                { text: 'Average digital skills', value: 3 },
-                { text: 'Good digital skills', value: 4 },
-                { text: 'Excellent digital capabilities', value: 5 }
-            ]
-        },
-        {
-            id: 'peo_2',
-            question: 'Is there a structured approach to upskilling employees?',
-            description: 'Upskilling includes training programs, workshops, and learning opportunities.',
+            id: 'mgt_people_1',
+            question: 'My teams have the digital skills needed to do their jobs effectively.',
+            description: 'Baseline literacy ensures adoption of new platforms.',
+            options: AGREEMENT_SCALE,
             inputType: INPUT_TYPES.SCENARIO,
-            options: [
-                { text: 'No structured approach', value: 1 },
-                { text: 'Ad-hoc training occasionally', value: 2 },
-                { text: 'Some training programs exist', value: 3 },
-                { text: 'Structured training programs', value: 4 },
-                { text: 'Comprehensive learning ecosystem', value: 5 }
-            ],
-            scenarios: [
-                { title: 'None', desc: 'No structured approach', value: 1 },
-                { title: 'Ad-hoc', desc: 'Ad-hoc training occasionally', value: 2 },
-                { title: 'Some Programs', desc: 'Some training programs exist', value: 3 },
-                { title: 'Structured', desc: 'Structured training programs', value: 4 },
-                { title: 'Comprehensive', desc: 'Comprehensive learning ecosystem', value: 5 }
-            ]
+            scenarios: SCENARIO_MATURITY
         },
         {
-            id: 'peo_3',
-            question: 'How willing are employees to adopt new technologies?',
-            description: 'Willingness indicates openness to change and new ways of working.',
+            id: 'mgt_people_2',
+            question: 'I ensure training for new tools is available when my teams need it.',
+            description: 'Just-in-time training shortens the learning curve.',
+            options: FREQUENCY_SCALE,
             inputType: INPUT_TYPES.EMOJI,
-            emojiSet: [
-                { emoji: '😤', label: 'Highly Resistant', value: 1 },
-                { emoji: '😕', label: 'Somewhat Resistant', value: 2 },
-                { emoji: '😐', label: 'Neutral', value: 3 },
-                { emoji: '🙂', label: 'Generally Willing', value: 4 },
-                { emoji: '🤩', label: 'Very Enthusiastic', value: 5 }
-            ],
-            options: [
-                { text: 'Highly resistant to change', value: 1 },
-                { text: 'Somewhat resistant', value: 2 },
-                { text: 'Neutral attitude', value: 3 },
-                { text: 'Generally willing', value: 4 },
-                { text: 'Very enthusiastic', value: 5 }
-            ]
+            emojiSet: EMOJI_FREQUENCY
         },
         {
-            id: 'peo_4',
-            question: 'Are there digital champions or advocates in your organization?',
-            description: 'Digital champions help drive adoption and support colleagues.',
-            inputType: INPUT_TYPES.SEGMENTED,
-            options: [
-                { text: 'No digital champions', value: 1 },
-                { text: 'Few informal champions', value: 2 },
-                { text: 'Some recognized champions', value: 3 },
-                { text: 'Active champion network', value: 4 },
-                { text: 'Strong champion program', value: 5 }
-            ]
-        },
-        {
-            id: 'peo_5',
-            question: 'How effective is your recruitment for digital roles?',
-            description: 'Recruitment effectiveness in attracting and hiring digital talent.',
+            id: 'mgt_people_3',
+            question: 'My teams have clear channels to get help with digital tools.',
+            description: 'Clear champions accelerate troubleshooting and adoption.',
+            options: AGREEMENT_SCALE,
             inputType: INPUT_TYPES.EMOJI,
-            emojiSet: [
-                { emoji: '😰', label: 'Very Difficult', value: 1 },
-                { emoji: '😟', label: 'Challenging', value: 2 },
-                { emoji: '😐', label: 'Moderate', value: 3 },
-                { emoji: '😊', label: 'Good', value: 4 },
-                { emoji: '🌟', label: 'Excellent', value: 5 }
-            ],
-            options: [
-                { text: 'Very difficult to recruit', value: 1 },
-                { text: 'Challenging recruitment', value: 2 },
-                { text: 'Moderate success in recruitment', value: 3 },
-                { text: 'Good recruitment outcomes', value: 4 },
-                { text: 'Excellent talent acquisition', value: 5 }
-            ]
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mgt_people_4',
+            question: 'I include digital upskilling and knowledge sharing in my team\'s performance goals.',
+            description: 'Rewarding digital behaviors encourages participation.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mgt_people_5',
+            question: 'I prioritize strong digital experience when recruiting new team members.',
+            description: 'Fresh talent raises the overall capability baseline.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         }
     ],
     culture: [
         {
-            id: 'cul_1',
-            question: 'How innovative is your organizational culture?',
-            description: 'Innovation culture encourages experimentation and new ideas.',
-            inputType: INPUT_TYPES.GRADIENT,
-            options: [
-                { text: 'Not innovative', value: 1 },
-                { text: 'Low innovation', value: 2 },
-                { text: 'Moderate innovation', value: 3 },
-                { text: 'Innovative culture', value: 4 },
-                { text: 'Highly innovative', value: 5 }
-            ]
-        },
-        {
-            id: 'cul_2',
-            question: 'Is there a culture of continuous learning?',
-            description: 'Learning culture supports ongoing development and improvement.',
+            id: 'mgt_culture_1',
+            question: 'I actively encourage my teams to experiment with new digital ideas.',
+            description: 'Empowered teams surface incremental improvements faster.',
+            options: AGREEMENT_SCALE,
             inputType: INPUT_TYPES.EMOJI,
-            emojiSet: [
-                { emoji: '📕', label: 'No Learning', value: 1 },
-                { emoji: '📖', label: 'Limited', value: 2 },
-                { emoji: '📚', label: 'Some', value: 3 },
-                { emoji: '🎓', label: 'Strong', value: 4 },
-                { emoji: '🏆', label: 'Excellence', value: 5 }
-            ],
-            options: [
-                { text: 'No learning culture', value: 1 },
-                { text: 'Limited learning focus', value: 2 },
-                { text: 'Some learning initiatives', value: 3 },
-                { text: 'Strong learning culture', value: 4 },
-                { text: 'Excellence in continuous learning', value: 5 }
-            ]
+            emojiSet: EMOJI_AGREEMENT
         },
         {
-            id: 'cul_3',
-            question: 'How does your organization handle failure and risk?',
-            description: 'Risk culture affects willingness to try new approaches.',
+            id: 'mgt_culture_2',
+            question: 'I ensure my teams can learn from failed pilots without fear of blame.',
+            description: 'Psychological safety keeps innovation moving.',
+            options: AGREEMENT_SCALE,
             inputType: INPUT_TYPES.SCENARIO,
-            options: [
-                { text: 'Punish failure, avoid risk', value: 1 },
-                { text: 'Discourage risk-taking', value: 2 },
-                { text: 'Tolerate some risk', value: 3 },
-                { text: 'Encourage calculated risk', value: 4 },
-                { text: 'Embrace failure as learning', value: 5 }
-            ],
-            scenarios: [
-                { title: 'Risk Averse', desc: 'Punish failure, avoid risk', value: 1 },
-                { title: 'Discouraged', desc: 'Discourage risk-taking', value: 2 },
-                { title: 'Tolerant', desc: 'Tolerate some risk', value: 3 },
-                { title: 'Encouraged', desc: 'Encourage calculated risk', value: 4 },
-                { title: 'Embraced', desc: 'Embrace failure as learning', value: 5 }
-            ]
+            scenarios: SCENARIO_MATURITY
         },
         {
-            id: 'cul_4',
-            question: 'Is collaboration encouraged across departments?',
-            description: 'Collaboration enables sharing of knowledge and resources.',
-            inputType: INPUT_TYPES.SEGMENTED,
-            options: [
-                { text: 'Siloed departments', value: 1 },
-                { text: 'Limited collaboration', value: 2 },
-                { text: 'Some cross-team work', value: 3 },
-                { text: 'Good collaboration', value: 4 },
-                { text: 'Excellent collaboration culture', value: 5 }
-            ]
-        },
-        {
-            id: 'cul_5',
-            question: 'How customer-centric is your organization?',
-            description: 'Customer focus drives digital initiatives and improvements.',
+            id: 'mgt_culture_3',
+            question: 'I openly share lessons from my department\'s digital projects with other leaders.',
+            description: 'Storytelling helps other teams avoid repeated mistakes.',
+            options: FREQUENCY_SCALE,
             inputType: INPUT_TYPES.EMOJI,
-            emojiSet: [
-                { emoji: '🚫', label: 'Not Focused', value: 1 },
-                { emoji: '👤', label: 'Limited', value: 2 },
-                { emoji: '👥', label: 'Moderate', value: 3 },
-                { emoji: '❤️', label: 'Strong', value: 4 },
-                { emoji: '💎', label: 'Extremely', value: 5 }
-            ],
-            options: [
-                { text: 'Not customer-focused', value: 1 },
-                { text: 'Limited customer focus', value: 2 },
-                { text: 'Moderate customer orientation', value: 3 },
-                { text: 'Strong customer focus', value: 4 },
-                { text: 'Extremely customer-centric', value: 5 }
-            ]
+            emojiSet: EMOJI_FREQUENCY
+        },
+        {
+            id: 'mgt_culture_4',
+            question: 'I use customer feedback to guide decisions about our digital tools.',
+            description: 'Customer insight keeps teams focused on real value.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mgt_culture_5',
+            question: 'I formally recognize teams that successfully automate manual work.',
+            description: 'Recognition signals that automation is a priority.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         }
     ],
     tools: [
         {
-            id: 'too_1',
-            question: 'How well are business processes documented?',
-            description: 'Process documentation enables optimization and automation.',
+            id: 'mgt_tools_1',
+            question: 'The tools my department uses daily are intuitive and reliable.',
+            description: 'Ease-of-use reduces workarounds and shadow systems.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mgt_tools_2',
+            question: 'Data flows automatically between the core systems my department relies on.',
+            description: 'Integrated tools eliminate duplicate entry.',
+            options: AGREEMENT_SCALE,
             inputType: INPUT_TYPES.SCENARIO,
-            options: [
-                { text: 'Processes not documented', value: 1 },
-                { text: 'Some processes documented', value: 2 },
-                { text: 'Key processes documented', value: 3 },
-                { text: 'Most processes documented', value: 4 },
-                { text: 'Comprehensive process documentation', value: 5 }
-            ],
-            scenarios: [
-                { title: 'None', desc: 'Processes not documented', value: 1 },
-                { title: 'Some', desc: 'Some processes documented', value: 2 },
-                { title: 'Key Ones', desc: 'Key processes documented', value: 3 },
-                { title: 'Most', desc: 'Most processes documented', value: 4 },
-                { title: 'Comprehensive', desc: 'Comprehensive process documentation', value: 5 }
-            ]
+            scenarios: SCENARIO_MATURITY
         },
         {
-            id: 'too_2',
-            question: 'Are digital tools integrated across the organization?',
-            description: 'Integration prevents data silos and improves efficiency.',
+            id: 'mgt_tools_3',
+            question: 'My teams can automate their repetitive steps without waiting on IT.',
+            description: 'Citizen automation keeps momentum high.',
+            options: AGREEMENT_SCALE,
             inputType: INPUT_TYPES.EMOJI,
-            emojiSet: [
-                { emoji: '🏝️', label: 'None', value: 1 },
-                { emoji: '🔗', label: 'Limited', value: 2 },
-                { emoji: '⚙️', label: 'Some', value: 3 },
-                { emoji: '🔄', label: 'Good', value: 4 },
-                { emoji: '🌐', label: 'Fully Integrated', value: 5 }
-            ],
-            options: [
-                { text: 'No tool integration', value: 1 },
-                { text: 'Limited integration', value: 2 },
-                { text: 'Some integrated systems', value: 3 },
-                { text: 'Good system integration', value: 4 },
-                { text: 'Fully integrated ecosystem', value: 5 }
-            ]
+            emojiSet: EMOJI_AGREEMENT
         },
         {
-            id: 'too_3',
-            question: 'How effective are project management methodologies?',
-            description: 'Project management ensures successful delivery of initiatives.',
-            inputType: INPUT_TYPES.SEGMENTED,
-            options: [
-                { text: 'No formal methodology', value: 1 },
-                { text: 'Informal approaches', value: 2 },
-                { text: 'Basic methodology', value: 3 },
-                { text: 'Well-defined methodology', value: 4 },
-                { text: 'Mature project management', value: 5 }
-            ]
-        },
-        {
-            id: 'too_4',
-            question: 'Are analytics and reporting tools widely used?',
-            description: 'Analytics tools enable data-driven decision making.',
-            inputType: INPUT_TYPES.GRADIENT,
-            options: [
-                { text: 'No analytics tools', value: 1 },
-                { text: 'Limited analytics use', value: 2 },
-                { text: 'Some departments use analytics', value: 3 },
-                { text: 'Widespread analytics adoption', value: 4 },
-                { text: 'Advanced analytics everywhere', value: 5 }
-            ]
-        },
-        {
-            id: 'too_5',
-            question: 'How automated are routine business processes?',
-            description: 'Automation improves efficiency and reduces errors.',
+            id: 'mgt_tools_4',
+            question: 'I have access to up-to-date dashboard metrics to manage my department.',
+            description: 'Real-time data supports confident decisions.',
+            options: FREQUENCY_SCALE,
             inputType: INPUT_TYPES.EMOJI,
-            emojiSet: [
-                { emoji: '✋', label: 'Manual', value: 1 },
-                { emoji: '📝', label: 'Minimal', value: 2 },
-                { emoji: '⚙️', label: 'Some', value: 3 },
-                { emoji: '🤖', label: 'Good', value: 4 },
-                { emoji: '🚀', label: 'Highly Automated', value: 5 }
-            ],
-            options: [
-                { text: 'No process automation', value: 1 },
-                { text: 'Minimal automation', value: 2 },
-                { text: 'Some automated processes', value: 3 },
-                { text: 'Good automation level', value: 4 },
-                { text: 'Highly automated operations', value: 5 }
-            ]
+            emojiSet: EMOJI_FREQUENCY
+        },
+        {
+            id: 'mgt_tools_5',
+            question: 'My department\'s project work follows a clear, standardized delivery method.',
+            description: 'Shared methods make collaboration smoother.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.SCENARIO,
+            scenarios: SCENARIO_MATURITY
         }
     ],
     technology: [
         {
-            id: 'tec_1',
-            question: 'How modern is your IT infrastructure?',
-            description: 'Modern infrastructure supports digital initiatives effectively.',
-            inputType: INPUT_TYPES.GRADIENT,
-            options: [
-                { text: 'Outdated infrastructure', value: 1 },
-                { text: 'Some modern components', value: 2 },
-                { text: 'Mixed old and new systems', value: 3 },
-                { text: 'Mostly modern infrastructure', value: 4 },
-                { text: 'State-of-the-art infrastructure', value: 5 }
-            ]
-        },
-        {
-            id: 'tec_2',
-            question: 'Are cloud services utilized effectively?',
-            description: 'Cloud services provide scalability and flexibility.',
+            id: 'mgt_tech_1',
+            question: 'The core systems my department relies on are stable without frequent outages.',
+            description: 'Reliable platforms build confidence in digital ways of working.',
+            options: FREQUENCY_SCALE,
             inputType: INPUT_TYPES.EMOJI,
-            emojiSet: [
-                { emoji: '🏢', label: 'No Cloud', value: 1 },
-                { emoji: '☁️', label: 'Limited', value: 2 },
-                { emoji: '⛅', label: 'Some', value: 3 },
-                { emoji: '🌤️', label: 'Good', value: 4 },
-                { emoji: '🚀', label: 'Cloud-First', value: 5 }
-            ],
-            options: [
-                { text: 'No cloud usage', value: 1 },
-                { text: 'Limited cloud adoption', value: 2 },
-                { text: 'Some cloud services', value: 3 },
-                { text: 'Good cloud utilization', value: 4 },
-                { text: 'Cloud-first approach', value: 5 }
-            ]
+            emojiSet: EMOJI_FREQUENCY
         },
         {
-            id: 'tec_3',
-            question: 'How secure are your digital systems?',
-            description: 'Security is essential for digital transformation.',
-            inputType: INPUT_TYPES.SEGMENTED,
-            options: [
-                { text: 'Poor security measures', value: 1 },
-                { text: 'Basic security in place', value: 2 },
-                { text: 'Adequate security', value: 3 },
-                { text: 'Good security practices', value: 4 },
-                { text: 'Excellent security posture', value: 5 }
-            ]
+            id: 'mgt_tech_2',
+            question: 'The process for my department to request and procure a new digital tool is straightforward.',
+            description: 'Lightweight intake processes encourage innovation.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         },
         {
-            id: 'tec_4',
-            question: 'Is data managed effectively across the organization?',
-            description: 'Data management includes storage, quality, and accessibility.',
+            id: 'mgt_tech_3',
+            question: 'My teams have access to cloud or mobile versions of their tools when needed.',
+            description: 'Flexible access supports hybrid work.',
+            options: AGREEMENT_SCALE,
             inputType: INPUT_TYPES.SCENARIO,
-            options: [
-                { text: 'Poor data management', value: 1 },
-                { text: 'Basic data practices', value: 2 },
-                { text: 'Some data management', value: 3 },
-                { text: 'Good data practices', value: 4 },
-                { text: 'Excellent data management', value: 5 }
-            ],
-            scenarios: [
-                { title: 'Poor', desc: 'Poor data management', value: 1 },
-                { title: 'Basic', desc: 'Basic data practices', value: 2 },
-                { title: 'Some', desc: 'Some data management', value: 3 },
-                { title: 'Good', desc: 'Good data practices', value: 4 },
-                { title: 'Excellent', desc: 'Excellent data management', value: 5 }
-            ]
+            scenarios: SCENARIO_MATURITY
         },
         {
-            id: 'tec_5',
-            question: 'How scalable is your technology architecture?',
-            description: 'Scalable architecture supports growth and changing needs.',
+            id: 'mgt_tech_4',
+            question: 'Security requirements are clear and manageable for my teams to follow.',
+            description: 'Clarity keeps adoption high without creating friction.',
+            options: AGREEMENT_SCALE,
             inputType: INPUT_TYPES.EMOJI,
-            emojiSet: [
-                { emoji: '📦', label: 'Not Scalable', value: 1 },
-                { emoji: '📊', label: 'Limited', value: 2 },
-                { emoji: '📈', label: 'Some', value: 3 },
-                { emoji: '🔄', label: 'Good', value: 4 },
-                { emoji: '♾️', label: 'Highly Scalable', value: 5 }
-            ],
-            options: [
-                { text: 'Not scalable', value: 1 },
-                { text: 'Limited scalability', value: 2 },
-                { text: 'Some scalable components', value: 3 },
-                { text: 'Good scalability', value: 4 },
-                { text: 'Highly scalable architecture', value: 5 }
-            ]
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mgt_tech_5',
+            question: 'My department can easily combine data from different systems for strategic analysis.',
+            description: 'Good data management unlocks insights.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        }
+    ]
+};
+// Middle Management Question Database
+const QUESTIONS_MIDDLE_MGMT = {
+    organization: [
+        {
+            id: 'mid_org_1',
+            question: 'I successfully translate high-level strategy into actionable goals for my teams.',
+            description: 'Middle managers bridge the gap between vision and execution.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_org_2',
+            question: 'I communicate the business value of digital initiatives to my teams.',
+            description: 'Explaining the "why" drives adoption.',
+            options: FREQUENCY_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_FREQUENCY
+        },
+        {
+            id: 'mid_org_3',
+            question: 'I secure necessary funding or time for my teams to implement digital tools.',
+            description: 'Resource allocation is a critical middle management function.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_org_4',
+            question: 'I actively align our digital efforts with peer departments to ensure smooth handoffs.',
+            description: 'Breaking down silos happens at the operational leadership level.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_org_5',
+            question: 'I monitor and report on the progress of our digital roadmap to senior leadership.',
+            description: 'Upward reporting keeps enterprise strategy grounded in reality.',
+            options: FREQUENCY_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_FREQUENCY
+        }
+    ],
+    people: [
+        {
+            id: 'mid_people_1',
+            question: 'I know exactly where my teams have digital skill gaps.',
+            description: 'Identifying gaps is the first step to upskilling.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.SCENARIO,
+            scenarios: SCENARIO_MATURITY
+        },
+        {
+            id: 'mid_people_2',
+            question: 'I prioritize and approve training budgets for new digital tools.',
+            description: 'Securing the budget makes learning possible.',
+            options: FREQUENCY_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_FREQUENCY
+        },
+        {
+            id: 'mid_people_3',
+            question: 'I identify and support "digital champions" within my teams.',
+            description: 'Champions scale support beyond the manager.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_people_4',
+            question: 'I evaluate digital adaptability during performance reviews.',
+            description: 'Tying skills to performance drives behavior change.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_people_5',
+            question: 'I collaborate with HR to update job descriptions for modern digital skills.',
+            description: 'Future-proofing the talent pipeline requires management input.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        }
+    ],
+    culture: [
+        {
+            id: 'mid_culture_1',
+            question: 'I actively help my teams overcome resistance to new technologies.',
+            description: 'Change management is a core responsibility.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_culture_2',
+            question: 'I create an environment where my teams feel safe discussing failed digital experiments.',
+            description: 'Psychological safety is created by direct managers.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.SCENARIO,
+            scenarios: SCENARIO_MATURITY
+        },
+        {
+            id: 'mid_culture_3',
+            question: 'I encourage my teams to share their digital successes with the wider organization.',
+            description: 'Promoting wins builds momentum.',
+            options: FREQUENCY_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_FREQUENCY
+        },
+        {
+            id: 'mid_culture_4',
+            question: 'I push my teams to map digital ideas back to specific customer or internal pain points.',
+            description: 'Ensuring technology solves real problems.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_culture_5',
+            question: 'I publicly reward individuals who streamline or automate broken processes.',
+            description: 'Rewards reinforce the desired innovative culture.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        }
+    ],
+    tools: [
+        {
+            id: 'mid_tools_1',
+            question: 'I enforce the use of standardized company tools rather than allowing "shadow IT".',
+            description: 'Adherence to standards prevents data silos and compliance risks.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_tools_2',
+            question: 'I ensure my teams document their core processes before trying to automate them.',
+            description: 'You cannot automate a broken or undocumented process.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.SCENARIO,
+            scenarios: SCENARIO_MATURITY
+        },
+        {
+            id: 'mid_tools_3',
+            question: 'I actively look for repetitive tasks in my department that can be automated.',
+            description: 'Continuous improvement mindset at the management level.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_tools_4',
+            question: 'I rely on automated dashboards, not manual spreadsheets, to track my team\'s KPIs.',
+            description: 'Living the digital reality by managing through data.',
+            options: FREQUENCY_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_FREQUENCY
+        },
+        {
+            id: 'mid_tools_5',
+            question: 'I ensure my teams follow formal methodologies (e.g., Agile) for digital project delivery.',
+            description: 'Structured execution ensures predictable outcomes.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.SCENARIO,
+            scenarios: SCENARIO_MATURITY
+        }
+    ],
+    technology: [
+        {
+            id: 'mid_tech_1',
+            question: 'I effectively escalate systemic IT issues that are blocking my teams.',
+            description: 'Advocating for the team when tools fail.',
+            options: FREQUENCY_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_FREQUENCY
+        },
+        {
+            id: 'mid_tech_2',
+            question: 'I help my teams navigate the procurement process for new software.',
+            description: 'Guiding teams through internal bureaucracy.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_tech_3',
+            question: 'I advocate for cloud-based or mobile solutions if my team needs remote flexibility.',
+            description: 'Ensuring technology supports the working model.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.SCENARIO,
+            scenarios: SCENARIO_MATURITY
+        },
+        {
+            id: 'mid_tech_4',
+            question: 'I ensure my teams understand and comply with cybersecurity policies.',
+            description: 'Translating security from an IT policy to a team behavior.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
+        },
+        {
+            id: 'mid_tech_5',
+            question: 'I leverage data combined from multiple systems to make strategic resourcing decisions.',
+            description: 'Using integrated data to lead the department.',
+            options: AGREEMENT_SCALE,
+            inputType: INPUT_TYPES.EMOJI,
+            emojiSet: EMOJI_AGREEMENT
         }
     ]
 };
@@ -1110,6 +1109,8 @@ function prepareActiveQuestionSet() {
     let baseSet;
     if (assessmentState.role === ROLE_TYPES.MANAGEMENT) {
         baseSet = cloneQuestionSet(QUESTIONS);
+    } else if (assessmentState.role === ROLE_TYPES.MIDDLE_MANAGEMENT) {
+        baseSet = cloneQuestionSet(QUESTIONS_MIDDLE_MGMT);
     } else {
         baseSet = cloneQuestionSet(QUESTIONS_EMPLOYEE);
     }
@@ -1768,6 +1769,16 @@ async function fetchAIInsights() {
     resultsContent.classList.add('d-none');
 
     try {
+        // Collect exact question text and scores to prevent AI hallucination
+        const rawAnswers = {};
+        if (typeof activeQuestions !== 'undefined' && activeQuestions) {
+            Object.values(activeQuestions).flat().forEach(q => {
+                if (q && q.id && q.text && assessmentState.answers[q.id]) {
+                    rawAnswers[q.text] = assessmentState.answers[q.id];
+                }
+            });
+        }
+
         const payload = {
             role: assessmentState.role || 'management',
             department: assessmentState.department || '',
@@ -1778,6 +1789,7 @@ async function fetchAIInsights() {
                 tools: assessmentState.categoryScores?.tools?.average || 0,
                 technology: assessmentState.categoryScores?.technology?.average || 0
             },
+            answers: rawAnswers,
             consentGiven: true
         };
 
